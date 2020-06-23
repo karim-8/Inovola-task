@@ -24,36 +24,38 @@ class _MyHomePageState extends State<HomeScreen> {
     ScreenScaler scaler = new ScreenScaler()..init(context);
 
     return Scaffold(
-      body: SingleChildScrollView(child: Consumer<DataViewModel>(
-        builder: (context, model, child) {
-          return model.data == null
-              ? Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Center(
-                        child: Container(
-                            width: 50,
-                            height: 50,
-                            child: CircularProgressIndicator()),
-                      ),
-                    ],
-                  ),
-                )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                      imageSlider(scaler, model.data),
-                      courseDetails(model.data),
-                      trainerInformation(model.data),
-                      courseInformation(model.data),
-                      courseCost(model.data),
-                      reserveButton()
-                    ]);
-        },
-      )),
+      body: SafeArea(
+        child: SingleChildScrollView(child: Consumer<DataViewModel>(
+          builder: (context, model, child) {
+            return model.data == null
+                ? Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Center(
+                          child: Container(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator()),
+                        ),
+                      ],
+                    ),
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                        imageSlider(scaler, model.data),
+                        courseDetails(model.data),
+                        trainerInformation(model.data),
+                        courseInformation(model.data),
+                        courseCost(model.data),
+                        reserveButton()
+                      ]);
+          },
+        )),
+      ),
     );
   }
 
